@@ -1,8 +1,8 @@
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "./layout/header";
-import Footer from "./layout/footer";
-
+import Elipse from "../../public/ellipse.svg";
+import Image from "next/image";
 const inter = Open_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "600", "800"],
@@ -18,6 +18,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} bg-[#faf6ef]`}>
+        <Image
+          src={Elipse}
+          className="absolute right-0 top-0 -z-10 w-8/12"
+          alt="White Elipse Image"
+        />
         <Header />
         {children}
       </body>
