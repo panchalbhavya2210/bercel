@@ -107,7 +107,7 @@ export default function Cart() {
             <strong>Use this data during checkout</strong>
             <p>Email : any email</p>
             <p>Credit Card Information:</p>
-            <p>Number : 4242 4242 4242 4242</p>
+            <p>Number : 4000 0035 6000 0008</p>
             <p>Data : 12/34</p>
             <p>CVV: 567</p>
           </div>
