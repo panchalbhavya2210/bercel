@@ -1,14 +1,16 @@
 // app/api/payment/route.js
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-
+// Reading the stripe key
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+// Processing the payment
 export async function POST(request) {
   const { items, totalAmt } = await request.json();
   console.log(items[0].product.name);
 
   if (!items || !totalAmt) {
+    // returning error if items or total amout is invalid
     return NextResponse.json({ message: "Invalid data" }, { status: 400 });
   }
 
@@ -28,10 +30,11 @@ export async function POST(request) {
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: "payment",
-      success_url: "http://localhost:3000/success",
-      cancel_url: "http://localhost:3000/cancel",
+      success_url: "https://homelyeq.vercel.app/success",
+      cancel_url: "https://homelyeq.vercel.app/cancel",
     });
 
+    // returning the response of url to redirect client to stripe payment page
     return new Response(
       JSON.stringify({
         url: session.url,

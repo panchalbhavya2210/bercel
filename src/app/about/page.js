@@ -1,5 +1,5 @@
 import React from "react";
-
+// About page
 export default function Page() {
   return (
     <div className="p-5">

@@ -3,21 +3,29 @@ import { useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
 
 export default function Cart() {
+  // getting the data from local storage
   const [cart, setCart] = useLocalStorageState("cart", {});
   const getProductData = () => Object.values(cart || {});
-  let [checkOutText, changeText] = useState("Checkout");
   const productData = getProductData();
-  console.log(productData);
-  function removeProduct(index) {
-    const copyCart = { ...cart };
-    const cartKey = Object.keys(copyCart);
-    const keyRemoval = cartKey[index];
 
+  // checkout button inner text
+  let [checkOutText, changeText] = useState("Checkout");
+
+  // function to remove product
+  function removeProduct(index) {
+    // copying the array
+    const copyCart = { ...cart };
+    //accessing the key of the copied array
+    const cartKey = Object.keys(copyCart);
+    // assigning the key for removing process
+    const keyRemoval = cartKey[index];
+    // deleting the data for specific key
     delete copyCart[keyRemoval];
-    console.log(copyCart);
+    // re rendering the array
     setCart(copyCart);
   }
 
+  // function for online payment
   async function onlineCheckout() {
     changeText("Processing...");
     const response = await fetch("/api/payment", {
@@ -32,11 +40,9 @@ export default function Cart() {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       window.location.replace(data.sessionData.url);
     }
   }
-  // const [open, setOpen] = useState(true);
 
   return (
     <div className="mt-8 p-5">
@@ -82,9 +88,14 @@ export default function Cart() {
               </div>
             </li>
           ))}
+          <p className={`${productData.length == 0 ? "block" : "hidden"}`}>
+            Nothing in cart, add something first.
+          </p>
           <div className="flex justify-center">
             <button
-              className="mt-5 bg-[#a7ffa7] px-5 py-3 rounded-md text-xl font-[600]"
+              className={`mt-5 bg-[#a7ffa7] px-5 py-3 rounded-md text-xl font-[600] ${
+                productData.length == 0 ? "hidden" : "block"
+              }`}
               onClick={() => onlineCheckout()}
               aria-label="Checkout"
             >

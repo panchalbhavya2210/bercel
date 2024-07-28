@@ -14,6 +14,7 @@ function StarRating({ rating }) {
     );
 }
 
+//image carousel
 const ImageGallery = ({ imageArray, handleImageClick, currentImage }) => (
     <div className="flex md:flex-col lg:flex-col justify-around md:h-72 lg:h-96 overflow-scroll hideScrollbar ml-2">
         {imageArray.map((value) => (
@@ -29,6 +30,7 @@ const ImageGallery = ({ imageArray, handleImageClick, currentImage }) => (
     </div>
 );
 
+// product details
 const ProductDetails = ({ name, brand, category, description, averageRating, price, producData, customColors = ["Pink", "Green "] }) => {
     const [cart, setCart] = useLocalStorageState('cart', {});
     const [selectedColor, setSelectedColor] = useState(customColors[0]);
@@ -37,7 +39,6 @@ const ProductDetails = ({ name, brand, category, description, averageRating, pri
     function addToCart(product) {
         try {
             setBool(false)
-            console.log(addedToCart)
             setTimeout(() => {
                 setBool(true)
             }, 3000)
@@ -72,7 +73,7 @@ const ProductDetails = ({ name, brand, category, description, averageRating, pri
                 ${price}
             </div>
             <ColorPicker colors={customColors} selectedColor={selectedColor} setSelectedColor={setSelectedColor} />
-            <CartButtons adc={addToCart} producData={producData} />
+            <CartButtons addCartFinal={addToCart} producData={producData} />
 
             <div className={`bg-teal-100 border-t-4 border-[teal] rounded-b text-[teal] px-4 py-3 shadow-md ${addedToCart ? 'hidden' : 'block'}`} role="alert">
                 <div className="flex">
@@ -86,6 +87,8 @@ const ProductDetails = ({ name, brand, category, description, averageRating, pri
     );
 }
 
+
+// color picker of product
 const ColorPicker = ({ colors, selectedColor, setSelectedColor }) => (
     <div className="colorPicker mt-7">
         <div className="pText">Colors</div>
@@ -103,10 +106,12 @@ const ColorPicker = ({ colors, selectedColor, setSelectedColor }) => (
     </div>
 );
 
-const CartButtons = ({ adc, producData }) => (
+
+// cart button
+const CartButtons = ({ addCartFinal, producData }) => (
     <div className="cartButtons mt-7">
         <div className="flex wishlist">
-            <button className="w-11/12 bg-light-purple py-3 rounded-md" onClick={() => { adc(producData) }} aria-label="Add to cart">
+            <button className="w-11/12 bg-light-purple py-3 rounded-md" onClick={() => { addCartFinal(producData) }} aria-label="Add to cart">
                 <span className="text-dark-purple font-[600]" >Add To Cart</span>
             </button>
             <button className="border-dark-purple border ml-2 rounded-md px-1" aria-label="Wishlist button">
