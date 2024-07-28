@@ -1,7 +1,10 @@
 "use client";
 import { useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
-
+export const metadata = {
+  title: "Cart",
+  description: "Cart Page",
+};
 export default function Cart() {
   // getting the data from local storage
   const [cart, setCart] = useLocalStorageState("cart", {});

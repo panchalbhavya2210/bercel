@@ -1,4 +1,8 @@
 import React from "react";
+export const metadata = {
+  title: "Shop",
+  description: "Shop Page",
+};
 import ProductPage from "../components/product";
 //Fetching the data from api
 async function fetchApi() {

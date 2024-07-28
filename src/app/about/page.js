@@ -1,5 +1,8 @@
 import React from "react";
-// About page
+export const metadata = {
+  title: "About",
+  description: "About Page",
+};
 export default function Page() {
   return (
     <div className="p-5">
