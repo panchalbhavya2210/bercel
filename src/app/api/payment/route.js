@@ -30,6 +30,9 @@ export async function POST(request) {
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: "payment",
+      shipping_address_collection: {
+        allowed_countries: ["IN"],
+      },
       success_url: "https://homelyeq.vercel.app/success",
       cancel_url: "https://homelyeq.vercel.app/cancel",
     });
